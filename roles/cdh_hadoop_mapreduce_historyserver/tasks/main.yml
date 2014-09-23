@@ -1,0 +1,5 @@
+---
+
+- name: install hadoop-mapreduce-historyserver via apt
+  yum: name=hadoop-mapreduce-historyserver state=latest
+  tags: hadoop

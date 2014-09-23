@@ -1,0 +1,19 @@
+site_name: nflabsprod
+# IPv4 maximum transmission unit, 9216 is the maximum for Intel/Cisco hardware
+mtu: 9216
+
+# Upgrade kernel to 3.13, much improved epoll performance
+upgrade_kernel: no
+
+hadoop:
+  fs_default_FS_port: 8020
+  dfs_datanode_address_port: 50010
+  dfs_datanode_http_address_port: 50075
+  dfs_datanode_ipc_address_port:  50020
+  dfs_namenode_http_address_port: 50070
+  dfs_ha_zkfc_port: 8019
+  qjournal_port: 8485  
+  qjournal_http_port: 8480 
+  zookeeper_clientport: 2181
+  zookeeper_leader_port: 2888
+  zookeeper_election_port: 3888

@@ -1,0 +1,16 @@
+---
+# file: roles/elasticsearch/tasks/main.yml
+
+- name: install Elasticsearch
+  shell: creates=/usr/share/elasticsearch/bin/elasticsearch chdir=/tmp wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.2.noarch.rpm && rpm -Uvh /tmp/elasticsearch-1.3.2.noarch.rpm
+  tags: elasticsearch
+
+- name: create default configuration
+  template: src=elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml
+  tags: elasticsearch  
+
+- name: make sure Elasticsearch is enabled and started
+  service: name=elasticsearch enabled=yes state=started
+  tags: elasticsearch
+  notify:
+    - restart elasticsearch

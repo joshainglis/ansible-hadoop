@@ -1,0 +1,62 @@
+# Hadoop Nodes
+# ============
+
+[zookeepers] # minimal 3, must be odd number of hosts
+hmaster01 zookeeper_id=1
+hmaster02 zookeeper_id=2
+hslave01 zookeeper_id=3
+
+[namenodes]
+hmaster01
+hmaster02
+
+[journalnodes] # minimal 3, must be odd number of hosts
+hmaster01
+hmaster02
+hslave01
+
+[resourcemanager]
+hmaster01
+
+[datanodes]
+hslave[01:04]
+
+[nodemanagers:children]
+datanodes
+
+[historyserver]
+hmaster01
+
+# HBase Nodes
+# ===========
+
+[hbase_masters:children]
+namenodes
+
+[regionservers:children]
+datanodes
+
+[elasticsearch]
+luke.nflabs.com
+
+
+# Hive Nodes
+# ==========
+
+[hive_metastore]
+hmaster02
+
+
+# Groups
+# ======
+
+[masters:children]
+namenodes
+resourcemanager
+hbase_masters
+
+[slaves:children]
+zookeepers
+datanodes
+nodemanagers
+regionservers

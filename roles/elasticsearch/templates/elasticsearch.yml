@@ -1,0 +1,2 @@
+node.name: "{{inventory_hostname}}"
+cluster.name: {{site_name}}

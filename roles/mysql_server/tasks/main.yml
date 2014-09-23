@@ -1,0 +1,19 @@
+---
+# file: roles/mysql_server/tasks/main.yml
+
+- name: predefine MySQL root passwd
+  shell: executable=/bin/bash debconf-set-selections <<< "mysql-server mysql-server/root_password password hive_{{ site_name }}"
+  tags: mysql
+
+- name: predefine MySQL root passwd confirm
+  shell: executable=/bin/bash debconf-set-selections <<< "mysql-server mysql-server/root_password_again password hive_{{ site_name }}"
+  tags: mysql
+
+- name: install MySQL via apt
+  yum: name={{ item }}
+  with_items:
+    - mysql-server
+    - mysql-connector-java
+    - MySQL-python
+    - mysql
+  tags: mysql
