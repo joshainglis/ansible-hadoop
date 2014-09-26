@@ -5,7 +5,8 @@
   copy: src=etc/cloudera-CDH4.repo dest=/etc/yum.repos.d/cloudera-CDH4.repo
   tags:
     - hadoop
-    - hbase
-    - hive
+    - slaves
+    - zookeeper
+
 
 

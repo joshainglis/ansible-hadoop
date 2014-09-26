@@ -1,62 +1,42 @@
 # Hadoop Nodes
 # ============
 
-[zookeepers] # minimal 3, must be odd number of hosts
-hmaster01 zookeeper_id=1
-hmaster02 zookeeper_id=2
-hslave01 zookeeper_id=3
+[zookeepers]
+master.nflabs.com zookeeper_id=1
+master2.nflabs.com zookeeper_id=2
+pel.nflabs.com zookeeper_id=3
+
+# HADDOP DEPLOYMENT
+# =================
+
+[journalnodes]
+master.nflabs.com
+master2.nflabs.com
+pel.nflabs.com
 
 [namenodes]
-hmaster01
-hmaster02
-
-[journalnodes] # minimal 3, must be odd number of hosts
-hmaster01
-hmaster02
-hslave01
-
-[resourcemanager]
-hmaster01
+master.nflabs.com
+master2.nflabs.com
 
 [datanodes]
-hslave[01:04]
+data1.nflabs.com
+data2.nflabs.com
 
-[nodemanagers:children]
-datanodes
-
-[historyserver]
-hmaster01
-
-# HBase Nodes
-# ===========
-
-[hbase_masters:children]
-namenodes
-
-[regionservers:children]
-datanodes
+# ELASTICSEARCH
+# =============
 
 [elasticsearch]
-luke.nflabs.com
+data1.nflabs.com
+data2.nflabs.com
 
 
-# Hive Nodes
-# ==========
+# SPARK
+# =====
+[sparkworkers]
+data1.nflabs.com spark_id=1
+data2.nflabs.com spark_id=2
 
-[hive_metastore]
-hmaster02
+[sparkmasters]
+master.nflabs.com
+master2.nflabs.com
 
-
-# Groups
-# ======
-
-[masters:children]
-namenodes
-resourcemanager
-hbase_masters
-
-[slaves:children]
-zookeepers
-datanodes
-nodemanagers
-regionservers

@@ -1,0 +1,13 @@
+---
+# file: roles/spark/tasks/main.yml
+
+- name: copy init file
+  template: src=spark-master dest=/etc/init.d/spark-master owner=root group=root mode=755
+  tags:
+    - spark
+    - slaves
+
+- name: restart master
+  service: name=spark-master state=restarted
+  tags:
+    - spark

@@ -3,37 +3,29 @@
 
 - name: mount / with inode_readahead_blks=128,noatime,commit=30,errors=remount-ro
   shell: creates=/etc/fstab.bak chdir=/etc cp fstab fstab.bak && sed -i "s/ errors=remount-ro/ inode_readahead_blks=128,noatime,commit=30,errors=remount-ro/" fstab
+  tags: slaves
 
-#- name: write sysctl config file to /etc/sysctl.d/60-hadoop.conf
-#  template: src=sysctl.conf dest=/etc/sysctl.d/60-hadoop.conf owner=root group=root mode=0644
-#  notify:
-#    - restart procps
+- name: install commonly used packages via yum
+  yum: name={{ item }} state=installed
+  with_items:
+    - curl
+    - wget
+    - lzo-devel
+    - ntp
+    - rsyslog
+    - libselinux-python
+  tags:
+    - ntp
+    - slaves
 
 - name: configure /etc/security/limits.conf with high max file descriptors (soft/hard)
   template: src=limits.conf dest=/etc/security/limits.conf mode=0644
-
-#- name: configure /etc/pam.d/common-session and /etc/pam.d/common-session-noninteractive with pam_limits.so
-#  lineinfile: name={{ item }} regexp='pam_limits.so' line='session required pam_limits.so'
-#  with_items:
-#    - /etc/pam.d/common-session
-#    - /etc/pam.d/common-session-noninteractive
-
-- name: install commonly used packages via YUM
-  yum: name={{ item }} state=latest
-  with_items:
-    - curl
-    - dstat
-    - htop
-    - lzo-devel
-    - net-tools
-    - ntp
-    - rsyslog
-    - unzip
-  tags: ntp
+  tags: slaves
 
 - name: create the hosts file for all machines
   template: backup=yes src=hosts dest=/etc/hosts
-  tags: configuration
+  tags:
+    - slaves
 
 - name: configure rsyslog with the imfile module
   template: src=rsyslog.conf dest=/etc/rsyslog.d/30-imfile.conf owner=root group=root mode=0644
@@ -42,7 +34,7 @@
     - restart rsyslog
 
 - name: configure NTP in /etc/ntp.conf
-  template: src=ntp.conf dest=/etc/ntp.conf
+  template: src=ntp.conf dest=/etc/ntp/ntp.conf
   notify:
     - restart ntpd
   tags: ntp
@@ -51,24 +43,31 @@
   service: name=ntpd enabled=yes state=started
   tags: ntp
 
-- name: Update iptables
+- name: update iptables
   template: backup=yes src=iptable dest=/etc/sysconfig/iptables
+  tags: slaves
   notify: restart iptables
 
-- name: Remove OpenJDK
+- name: remove OpenJDK
   yum: name={{ item }} state=removed
   with_items: 
    - java
    - jdk
+  tags: slaves
 
-- name: Copy Sun JDK package
+- name: copy Sun JDK package
   copy: src=dependencies/jdk-7u67-linux-x64.rpm dest=/tmp/jdk-7u67-linux-x64.rpm
+  tags: slaves
 
-- name: Install the Sun JDK package
+- name: install the Sun JDK package
   command: rpm -Uvh /tmp/jdk-7u67-linux-x64.rpm
+  tags: slaves
 
-- name: Disable SELinux in conf file
+- name: disable SELinux in conf file
   lineinfile: dest=/etc/sysconfig/selinux regexp='^SELINUX=' line='SELINUX=disabled' state=present
+  tags: slaves
 
-- name: Disable SELinux dynamically
+- name: disable SELinux dynamically
   shell: creates=/etc/sysconfig/selinux.disabled setenforce 0 ; touch /etc/sysconfig/selinux.disabled
+  tags: slaves
+

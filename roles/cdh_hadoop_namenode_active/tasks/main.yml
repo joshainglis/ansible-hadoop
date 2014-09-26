@@ -1,0 +1,34 @@
+---
+# file: roles/cdh_namenode_active/tasks/main.yml
+
+- name: install hadoop-hdfs-namenode via yum
+  yum: name=hadoop-hdfs-namenode state=installed
+  tags: hadoop
+
+- name: create the name node data directory
+  file: path={{ item }}/nn owner=hdfs group=hdfs state=directory
+  with_items: hadoop.dfs_namenode_name_dir
+  tags: hadoop
+
+- name: format the namenode - WILL NOT FORMAT IF {{ item }}/nn/current/VERSION EXISTS TO AVOID DATA LOSS
+  command: creates={{ item }}/nn/current/VERSION su - hdfs -c "hdfs namenode -format -force"
+  with_items: hadoop.dfs_namenode_name_dir
+  tags: hadoop
+
+- name: install hadoop-hdfs-zkfc (Hadoop HDFS Zookeeper Failover Controller) via yum
+  yum: name=hadoop-hdfs-zkfc state=installed
+  tags: hadoop 
+
+- name: format hadoop-hdfs-zkfc
+  shell: creates={{ hadoop['dfs_datanode_data_dir'] }}/.zkfsformatted su - hdfs -c " hdfs zkfc -formatZK -force"; touch {{ hadoop['dfs_datanode_data_dir'] }}/.zkfsformatted
+  tags:
+    - hadoop
+
+- name: start primary datanode
+  service: name=hadoop-hdfs-namenode state=started
+
+- name: configure rsyslog for hadoop-hdfs-namenode
+  template: src=rsyslog.conf dest=/etc/rsyslog.d/60-hadoop-hdfs-namenode.conf owner=root group=root mode=0644
+  tags: rsyslog
+  notify:
+    - restart rsyslog

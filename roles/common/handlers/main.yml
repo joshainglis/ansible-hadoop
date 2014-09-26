@@ -1,8 +1,8 @@
 ---
 # file: roles/common/handlers/main.yml
 
-- name: restart ntp
-  service: name=ntp state=restarted
+- name: restart ntpd
+  service: name=ntpd state=restarted
 
 - name: restart procps
   service: name=procps state=restarted

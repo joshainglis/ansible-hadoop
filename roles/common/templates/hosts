@@ -1,1 +1,7 @@
 127.0.0.1 localhost
+
+192.168.10.200 master.nflabs.com
+192.168.10.205 master2.nflabs.com
+192.168.10.202 pel.nflabs.com
+192.168.10.203 data1.nflabs.com
+192.168.10.204 data2.nflabs.com

@@ -3,11 +3,17 @@
 
 - name: create the /data/dfs/dn directory
   file: path=/data/dfs/dn owner=hdfs group=hdfs state=directory
-  tags: hadoop
+  tags:
+    - hadoop
+    - slaves
 
-- name: install hadoop-hdfs-datanode via apt
+- name: install hadoop-hdfs-datanode via yum
   yum: name=hadoop-hdfs-datanode state=latest
-  tags: hadoop
+  tags:
+    - hadoop
+    - slaves
+  notify:
+    - restart hadoop-hdfs-datanode
 
 - name: configure rsyslog for hadoop-hdfs-datanode
   template: src=rsyslog.conf dest=/etc/rsyslog.d/60-hadoop-hdfs-datanode.conf owner=root group=root mode=0644

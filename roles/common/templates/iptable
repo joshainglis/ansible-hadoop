@@ -6,7 +6,7 @@
 :OUTPUT ACCEPT [0:0]
 
 # Common iptable config
--A INPUT -m iprange --src-range 222.122.171.230-222.122.171.239 -j ACCEPT
+-A INPUT -m iprange --src-range 192.168.10.1-192.168.10.254 -j ACCEPT
 -A INPUT -s 112.169.19.221/32 -j ACCEPT
 -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 -A INPUT -p icmp -j ACCEPT

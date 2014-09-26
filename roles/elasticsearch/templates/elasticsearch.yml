@@ -1,2 +1,7 @@
 node.name: "{{inventory_hostname}}"
 cluster.name: {{site_name}}
+
+discovery.zen.minimum_master_nodes: {% for host in groups['elasticsearch'] %}{% if loop.last %}{{ loop.index }}{% endif %} {% endfor %}
+
+discovery.zen.ping.multicast.enabled: false
+discovery.zen.ping.unicast.hosts: [{% for host in groups['elasticsearch'] %}{% if inventory_hostname != host %}"{{ host }}"{% if not loop.last %},{% endif %}{% endif %}{% endfor %}]
