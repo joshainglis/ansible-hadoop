@@ -3,7 +3,9 @@
 
 - name: mount / with inode_readahead_blks=128,noatime,commit=30,errors=remount-ro
   shell: creates=/etc/fstab.bak chdir=/etc cp fstab fstab.bak && sed -i "s/ errors=remount-ro/ inode_readahead_blks=128,noatime,commit=30,errors=remount-ro/" fstab
-  tags: slaves
+  tags:
+    - slaves
+    - monitor
 
 - name: install commonly used packages via yum
   yum: name={{ item }} state=installed
@@ -17,15 +19,19 @@
   tags:
     - ntp
     - slaves
+    - monitor
 
 - name: configure /etc/security/limits.conf with high max file descriptors (soft/hard)
   template: src=limits.conf dest=/etc/security/limits.conf mode=0644
-  tags: slaves
+  tags:
+    - slaves
+    - monitor
 
 - name: create the hosts file for all machines
   template: backup=yes src=hosts dest=/etc/hosts
   tags:
     - slaves
+    - monitor
 
 - name: configure rsyslog with the imfile module
   template: src=rsyslog.conf dest=/etc/rsyslog.d/30-imfile.conf owner=root group=root mode=0644
@@ -45,7 +51,9 @@
 
 - name: update iptables
   template: backup=yes src=iptable dest=/etc/sysconfig/iptables
-  tags: slaves
+  tags:
+    - slaves
+    - monitor
   notify: restart iptables
 
 - name: remove OpenJDK
@@ -53,21 +61,30 @@
   with_items: 
    - java
    - jdk
-  tags: slaves
+  tags:
+    - slaves
+    - monitor
 
 - name: copy Sun JDK package
   copy: src=dependencies/jdk-7u67-linux-x64.rpm dest=/tmp/jdk-7u67-linux-x64.rpm
-  tags: slaves
+  tags:
+    - slaves
+    - monitor
 
 - name: install the Sun JDK package
   command: rpm -Uvh /tmp/jdk-7u67-linux-x64.rpm
-  tags: slaves
+  tags:
+    - slaves
+    - monitor
 
 - name: disable SELinux in conf file
   lineinfile: dest=/etc/sysconfig/selinux regexp='^SELINUX=' line='SELINUX=disabled' state=present
-  tags: slaves
+  tags:
+    - slaves
+    - monitor
 
 - name: disable SELinux dynamically
   shell: creates=/etc/sysconfig/selinux.disabled setenforce 0 ; touch /etc/sysconfig/selinux.disabled
-  tags: slaves
-
+  tags:
+    - slaves
+    - monitor

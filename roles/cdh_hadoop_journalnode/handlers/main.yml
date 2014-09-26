@@ -2,7 +2,7 @@
 # file: roles/cdh_hadoop_journalnode/handlers/main.yml
 
 - name: restart hadoop-hdfs-journalnode
-  service: name=hadoop-hdfs-journalnode state=restarted
+  service: name=hadoop-hdfs-journalnode state=restarted enabled=yes
   ignore_errors: yes
 
 - name: restart rsyslog

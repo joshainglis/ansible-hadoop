@@ -9,6 +9,7 @@
 # Env variables
 NAME="spark-master"
 SPARK_MASTER_BIN="{{ spark.location }}/sbin/start-master.sh"
+SPARK_MASTER_BIN_STOP="{{ spark.location }}/sbin/stop-master.sh"
 SPARK_MASTER_OPTIONS=" "
 PIDFILE="/var/run/${NAME}.pid"
 
@@ -29,10 +30,8 @@ find_spark_process() {
 
 start() {
   local pid
-
   if [[ -f "${PIDFILE}" ]]; then
     log_failure_msg "${NAME} is running"
-     exit 1;
   fi
   pid="`${SPARK_MASTER_BIN} ${SPARK_MASTER_OPTIONS} > /dev/null 2>&1 & echo $!`"
   if [[ -z "${pid}" ]]; then
@@ -55,6 +54,7 @@ stop() {
   else
     kill -9 ${pid}
     rm -f ${PIDFILE}
+    $("${SPARK_MASTER_BIN_STOP}")
     log_success_msg "${NAME}"
   fi
 }
@@ -66,19 +66,11 @@ case "${1}" in
   stop)
     stop
     ;;
-  reload)
-    stop
-    start
-    ;;
-  restart)
-    stop
-    start
-    ;;
   status)
     find_spark_process
     ;;
   *)
-    echo "Usage: $0 {start|stop|restart|reload|status}"
+    echo "Usage: $0 {start|stop|status}"
 esac
 
 exit 0

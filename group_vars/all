@@ -23,3 +23,6 @@ spark:
 #1g
   location: /usr/lib/spark
   webui: 4242
+
+nginx:
+  workers: "{{ hostvars[inventory_hostname].ansible_processor_count }}"

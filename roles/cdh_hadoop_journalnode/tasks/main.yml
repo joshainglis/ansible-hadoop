@@ -9,7 +9,8 @@
 
 - name: install hadoop-hdfs-journalnode via yum
   yum: name=hadoop-hdfs-journalnode state=latest
-  tags: hadoop
+  tags:
+    - hadoop
   notify:
     - restart hadoop-hdfs-journalnode
 

@@ -40,3 +40,7 @@ data2.nflabs.com
 master.nflabs.com
 master2.nflabs.com
 
+# Monitoring
+# ==========
+[monitor]
+monitor.nflabs.com

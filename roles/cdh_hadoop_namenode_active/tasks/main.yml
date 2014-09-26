@@ -25,7 +25,9 @@
     - hadoop
 
 - name: start primary datanode
-  service: name=hadoop-hdfs-namenode state=started
+  service: name=hadoop-hdfs-namenode state=restarted enabled=yes
+  tags:
+    - hadoop
 
 - name: configure rsyslog for hadoop-hdfs-namenode
   template: src=rsyslog.conf dest=/etc/rsyslog.d/60-hadoop-hdfs-namenode.conf owner=root group=root mode=0644

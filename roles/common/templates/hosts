@@ -3,3 +3,4 @@
 
 {% for host in groups['all'] %}{{ hostvars[host].ipv4_address }} {{ host }}
 {% endfor %}
+

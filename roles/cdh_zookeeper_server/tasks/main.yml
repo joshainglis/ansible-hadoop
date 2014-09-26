@@ -20,7 +20,8 @@
   template: src=zoo.cfg dest=/etc/zookeeper/conf/zoo.cfg owner=zookeeper group=zookeeper mode=0644
   notify:
     - restart zookeeper
-  tags: zookeeper
+  tags:
+    - zookeeper
 
 - name: initialize ZooKeeper
   command: creates=/var/lib/zookeeper/myid service zookeeper-server init --myid={{ zookeeper_id }}

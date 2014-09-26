@@ -62,3 +62,7 @@
 - hosts: sparkworkers
   roles:
     - spark_workers
+
+- hosts: monitor
+  roles:
+    - nginx

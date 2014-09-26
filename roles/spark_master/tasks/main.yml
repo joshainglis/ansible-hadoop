@@ -7,7 +7,7 @@
     - spark
     - slaves
 
-- name: restart master
-  service: name=spark-master state=restarted
+- name: start master
+  service: name=spark-master state=started
   tags:
     - spark
