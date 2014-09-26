@@ -1,10 +1,14 @@
+# Global parameters
+##
+
+# Cluster name
 site_name: nflabsprod
 
 # IPv4 maximum transmission unit, 9216 is the maximum for Intel/Cisco hardware
 mtu: 9216
 
-# Upgrade kernel to 3.13, much improved epoll performance
-upgrade_kernel: no
+#
+ip_range: 192.168.10.1-192.168.10.254
 
 hadoop:
   dfs_datanode_data_dir: /data/dfs
