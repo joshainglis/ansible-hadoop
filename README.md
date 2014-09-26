@@ -60,8 +60,8 @@ restart all services run
 ./restart
 ```
 
-If you want to just restart some service run:
-Simply run 
+If you want just restart some services run:
+
 ```sh
 ./restart serviceName
 ```
