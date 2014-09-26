@@ -5,7 +5,6 @@ Cluster deployment
 The playbooks in this example are designed to deploy a Hadoop cluster on a CentOS 6 or RHEL 6 environment using Ansible. The playbooks can:
 
  1.  Deploy a fully functional Hadoop cluster with HA and automatic failover. With Zookepper, Spark and Elasticsearch.
-
  2. Deploy additional nodes to scale the cluster.
 
 
@@ -42,3 +41,6 @@ available tags:
 ```sh
 ./deploy.sh zookeeper
 ```
+
+#### License
+Licensed under the [Apache License, Version 2.0](https://github.com/NFLabs/cluster-deployment/blob/master/LICENSE).
