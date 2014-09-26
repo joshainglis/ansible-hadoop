@@ -42,5 +42,13 @@ available tags:
 ./deploy.sh zookeeper
 ```
 
+### Services url
+
+ * **HDFS**: master:50070 - *active*
+ * **HDFS**: master2:50070 - *standby*
+ * **Spark Master**: master:4242
+ * **Spark Master2**: master2:4242
+ * **Elasticsearch**: eshost:9200
+
 #### License
 Licensed under the [Apache License, Version 2.0](https://github.com/NFLabs/cluster-deployment/blob/master/LICENSE).
