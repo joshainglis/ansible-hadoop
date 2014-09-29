@@ -26,3 +26,7 @@ spark:
 
 nginx:
   workers: "{{ hostvars[inventory_hostname].ansible_processor_count }}"
+
+elasticsearch:
+  data : /var/data/elasticsearch
+  logs: /var/log/elasticsearch

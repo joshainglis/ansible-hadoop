@@ -6,6 +6,7 @@
   tags:
     - hadoop
     - configuration
+    - slaves
 
 - name: configure hadoop in /etc/hadoop/conf
   template: src={{ item }} dest=/etc/hadoop/conf/{{ item }} owner=root group=root mode=0644
@@ -20,3 +21,4 @@
     - hadoop
     - configuration
     - restartHdfs
+    - slaves

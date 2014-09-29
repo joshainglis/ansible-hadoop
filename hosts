@@ -21,6 +21,7 @@ master2.nflabs.com
 [datanodes]
 data1.nflabs.com
 data2.nflabs.com
+data3.nflabs.com
 
 # ELASTICSEARCH
 # =============
@@ -28,13 +29,14 @@ data2.nflabs.com
 [elasticsearch]
 data1.nflabs.com
 data2.nflabs.com
-
+data3.nflabs.com
 
 # SPARK
 # =====
 [sparkworkers]
 data1.nflabs.com
 data2.nflabs.com
+data3.nflabs.com
 
 [sparkmasters]
 master.nflabs.com

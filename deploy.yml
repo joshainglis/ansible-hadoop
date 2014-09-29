@@ -6,6 +6,8 @@
   tasks:
     - name: determine interface
       set_fact: ipv4_address="{{ hostvars[inventory_hostname].ansible_default_ipv4.address }}"
+      tags:
+        - slaves
 
 # Deploy the default roles to all nodes
 - hosts: all

@@ -5,9 +5,8 @@
   template: src=spark-master dest=/etc/init.d/spark-master owner=root group=root mode=755
   tags:
     - spark
-    - slaves
 
 - name: start master
-  service: name=spark-master state=started
+  service: name=spark-master state=restarted
   tags:
     - spark
