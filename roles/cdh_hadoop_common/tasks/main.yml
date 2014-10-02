@@ -16,15 +16,3 @@
   tags:
     - hadoop
     - slaves
-
-- name: create the /data directory
-  file: path=/data owner=hdfs group=hdfs state=directory
-  tags:
-    - hadoop
-    - slaves
-
-- name: create the /data/dfs directory
-  file: path=/data/dfs owner=hdfs group=hdfs state=directory
-  tags:
-    - hadoop
-    - slaves

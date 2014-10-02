@@ -8,25 +8,26 @@ site_name: nflabsprod
 mtu: 9216
 
 #
-ip_range: 192.168.10.1-192.168.10.254
+ip_range: 222.122.171.230-222.122.171.239
+#ip_range: 192.168.10.1-192.168.10.254
 
 hadoop:
-  dfs_datanode_data_dir: /data/dfs
+  dfs_datanode_data_dir: /data/hadoop
+  dfs_datanode_data_dir_nn: /data/hadoop/nn
+  dfs_datanode_data_dir_jn: /data/hadoop/jn
+  dfs_datanode_data_dir_dn: /data0/hadoop/dn
 
 spark:
   version: 1.1.0
-  workermemory: 1g
-#16g
-  drivermemory: 1g
-#3g
+  workermemory: 16g
+  drivermemory: 3g
   daemonmemory: 1g
-#1g
   location: /usr/lib/spark
-  webui: 4242
+  webui: 8080
 
 nginx:
   workers: "{{ hostvars[inventory_hostname].ansible_processor_count }}"
 
 elasticsearch:
-  data : /var/data/elasticsearch
-  logs: /var/log/elasticsearch
+  data : /data1/elasticsearch
+  logs: /data1/log

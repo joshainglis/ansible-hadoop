@@ -78,17 +78,17 @@
 
     <property>
         <name>dfs.journalnode.edits.dir</name>
-        <value>{{ hadoop['dfs_datanode_data_dir'] }}/jn</value>
+        <value>{{ hadoop['dfs_datanode_data_dir_jn'] }}</value>
     </property>
 
     <property>
         <name>dfs.name.dir</name>
-        <value>file://{{ hadoop['dfs_datanode_data_dir'] }}/nn</value>
+        <value>file://{{ hadoop['dfs_datanode_data_dir_nn'] }}</value>
     </property>
 
     <property>
         <name>dfs.data.dir</name>
-        <value>file://{{ hadoop['dfs_datanode_data_dir'] }}/dn</value>
+        <value>file://{{ hadoop['dfs_datanode_data_dir_dn'] }}</value>
     </property>
 
     <property>

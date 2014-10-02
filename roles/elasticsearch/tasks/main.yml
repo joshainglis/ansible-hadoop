@@ -1,20 +1,20 @@
 ---
 # file: roles/elasticsearch/tasks/main.yml
 
+- name: install Elasticsearch
+  shell: creates=/usr/share/elasticsearch/bin/elasticsearch chdir=/tmp wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.4.noarch.rpm && rpm -Uvh /tmp/elasticsearch-1.3.4.noarch.rpm
+  tags:
+    - elasticsearch
+    - slaves
+
 - name: create elasticsearch data folder
-  file: path={{ elasticsearch.data  }} owner=root state=directory
+  file: path={{ elasticsearch.data  }} owner=elasticsearch state=directory
   tags:
     - elasticsearch
     - slaves
 
 - name: create elasticsearch logs folder
-  file: path={{ elasticsearch.logs  }} owner=root state=directory
-  tags:
-    - elasticsearch
-    - slaves
-
-- name: install Elasticsearch
-  shell: creates=/usr/share/elasticsearch/bin/elasticsearch chdir=/tmp wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.4.noarch.rpm && rpm -Uvh /tmp/elasticsearch-1.3.4.noarch.rpm
+  file: path={{ elasticsearch.logs  }} owner=elasticsearch state=directory
   tags:
     - elasticsearch
     - slaves

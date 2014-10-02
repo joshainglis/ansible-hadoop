@@ -1,18 +1,23 @@
 ---
 # file: roles/cdh_namenode_active/tasks/main.yml
 
+- name: create the /data/hadoop directory
+  file: path=/data/hadoop owner=hdfs group=hdfs state=directory
+  tags:
+    - hadoop
+
 - name: install hadoop-hdfs-namenode via yum
   yum: name=hadoop-hdfs-namenode state=installed
   tags: hadoop
 
 - name: create the name node data directory
-  file: path={{ item }}/nn owner=hdfs group=hdfs state=directory
-  with_items: hadoop.dfs_namenode_name_dir
+  file: path={{ item }} owner=hdfs group=hdfs state=directory
+  with_items: hadoop.dfs_datanode_data_dir_nn
   tags: hadoop
 
-- name: format the namenode - WILL NOT FORMAT IF {{ item }}/nn/current/VERSION EXISTS TO AVOID DATA LOSS
-  command: creates={{ item }}/nn/current/VERSION su - hdfs -c "hdfs namenode -format -force"
-  with_items: hadoop.dfs_namenode_name_dir
+- name: format the namenode - WILL NOT FORMAT IF {{ item }}/current/VERSION EXISTS TO AVOID DATA LOSS
+  command: creates={{ item }}/current/VERSION su - hdfs -c "hdfs namenode -format -force"
+  with_items: hadoop.dfs_datanode_data_dir_nn
   tags: hadoop
 
 - name: install hadoop-hdfs-zkfc (Hadoop HDFS Zookeeper Failover Controller) via yum
