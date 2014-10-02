@@ -45,6 +45,14 @@ available tags:
 ./deploy zookeeper
 ```
 
+
+#### Version
+ * Hadoop (HDFS, Zookeeper, journal) : CDH4.7
+ * Elasticsearch : 1.3.4
+ * Spark : 1.1.0
+ * Java : 1.7 from oracle
+ * Nginx : 1.6.2
+
 ### Services url
 
  * **HDFS**: master:50070 - *active*

@@ -2,7 +2,7 @@
 # file: roles/nginx/tasks/main.yml
 
 - name: Install Nginx repo
-  shell: rpm -Uvh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+  shell: rpm -Uvh http://nginx.org/packages/centos/6/x86_64/RPMS/nginx-1.6.2-1.el6.ngx.x86_64.rpm
   ignore_errors: yes
   tags:
     - monitor
