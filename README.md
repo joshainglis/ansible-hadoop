@@ -1,18 +1,23 @@
-Cluster deployment and Management
-=================================
+# Ansible Haddop
+**Need Help?:** [Issues Tracking](https://github.com/NFLabs/ansible-hadoop/issues) | [acorbacho@nflabs.com](mailto:acorbacho@nflabs.com) <br/>
+**Contributing:** [Contribution Guide](https://github.com/NFLabs/ansible-hadoop/blob/master/CONTRIBUTING)<br/>
+**License:** [Apache 2.0](https://github.com/NFLabs/ansible-hadoop/blob/master/LICENSE)
 
-# Preface
-The playbooks in this example are designed to deploy a Hadoop cluster on a CentOS 6 or RHEL 6 environment using Ansible. The playbooks can:
+
+Ansible Haddop is a playbook that help you to deploy a new Hadoop and Spark cluster.
+
+
+The playbooks are designed to deploy a Hadoop cluster on a CentOS 6 or RHEL 6 environment using Ansible. The playbooks can:
 
  1.  Deploy a fully functional Hadoop cluster with HA and automatic failover. With Zookepper, Spark and Elasticsearch.
  2. Deploy additional nodes to scale the cluster.
 
 
-### Requirements
+## Requirements
  * Ansible 1.6+
- * CentOS 6.5
+ * CentOS 6.5+ or RedHat servers
 
-### Configuration
+## Configuration
 
 edit the files:
  * `hosts` : to determine where to install services
@@ -83,5 +88,3 @@ List of service that can be restarted
  * sparkmasters
  * sparckworkers
 
-#### License
-Licensed under the [Apache License, Version 2.0](https://github.com/NFLabs/cluster-deployment/blob/master/LICENSE).
