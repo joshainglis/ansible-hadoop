@@ -10,3 +10,12 @@ discovery.zen.ping.multicast.enabled: false
 {% set flag=0 %}
 
 discovery.zen.ping.unicast.hosts: [{% for host in groups['elasticsearch'] %}{% if inventory_hostname != host %}{% if not loop.first and flag == 1 %},{% else %} {% set flag=1 %}{% endif %}"{{ host }}"{% endif %}{% endfor %}]
+
+cloud:
+    aws:
+        access_key: your-access-key
+        secret_key: your-secret-key
+        region: us-east
+        s3:
+            protocol: http
+

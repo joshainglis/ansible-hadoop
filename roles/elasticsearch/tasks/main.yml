@@ -36,3 +36,9 @@
   tags:
     - elasticsearch
     - slaves
+
+- name: install plugin ec2
+  command: chdir=/usr/share/elasticsearch/bin ./plugin -install  elasticsearch/elasticsearch-cloud-aws/2.4.0
+  tags:
+    - elasticsearch
+    - slaves
