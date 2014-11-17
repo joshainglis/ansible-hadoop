@@ -25,11 +25,9 @@ data3.nflabs.com
 
 # ELASTICSEARCH
 # =============
-
 [elasticsearch]
-data1.nflabs.com
-data2.nflabs.com
-data3.nflabs.com
+
+
 
 # SPARK
 # =====
