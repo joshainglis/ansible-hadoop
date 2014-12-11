@@ -15,10 +15,10 @@ hadoop:
   dfs_datanode_data_dir: /data/hadoop
   dfs_datanode_data_dir_nn: /data/hadoop/nn
   dfs_datanode_data_dir_jn: /data/hadoop/jn
-  dfs_datanode_data_dir_dn: /data0/hadoop/dn
+  dfs_datanode_data_dir_dn: /data/hadoop/dn
 
 spark:
-  version: 1.1.0
+  version: 1.1.1
   workermemory: 16g
   drivermemory: 3g
   daemonmemory: 1g
@@ -29,5 +29,6 @@ nginx:
   workers: "{{ hostvars[inventory_hostname].ansible_processor_count }}"
 
 elasticsearch:
-  data : /data1/elasticsearch
+  version: 1.4.1
+  data: /data1/elasticsearch
   logs: /data1/log
