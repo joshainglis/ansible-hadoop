@@ -72,7 +72,7 @@
 
     <property>
         <name>dfs.blocksize</name>
-        <value>67108864</value>
+        <value>{{ dfs_blocksize }}</value>
         <final>true</final>
     </property>
 
