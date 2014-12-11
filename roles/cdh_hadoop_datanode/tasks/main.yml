@@ -1,15 +1,15 @@
 ---
 # file: roles/cdh_hadoop_datanode/tasks/main.yml
 
-- name: create the /data0/hadoop directory
-  file: path=/data0/hadoop owner=hdfs group=hdfs state=directory
+- name: create the /data/hadoop directory
+  file: path=/data/hadoop owner=hdfs group=hdfs state=directory
   tags:
     - hadoop
     - slaves
 
 
-- name: create the /data0/hadoop/dn directory
-  file: path=/data0/hadoop/dn owner=hdfs group=hdfs state=directory
+- name: create the /data/hadoop/dn directory
+  file: path=/data/hadoop/dn owner=hdfs group=hdfs state=directory
   tags:
     - hadoop
     - slaves
