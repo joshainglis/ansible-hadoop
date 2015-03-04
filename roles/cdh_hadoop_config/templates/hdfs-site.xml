@@ -93,17 +93,21 @@
 
     <property>
         <name>dfs.journalnode.edits.dir</name>
-        <value>{{ hadoop['dfs_datanode_data_dir_jn'] }}</value>
+        <value>{{ hadoop['dfs_dir_parent'] }}{{ hadoop['dfs_dir_jn'] }}</value>
     </property>
 
+    
+    
+    
     <property>
         <name>dfs.name.dir</name>
-        <value>file://{{ hadoop['dfs_datanode_data_dir_nn'] }}</value>
+        <value>file://{{ hadoop['dfs_dir_parent'] }}{{ hadoop['dfs_dir_nn'] }}</value>
     </property>
-
+    
+    {% set flag=0 %}
     <property>
         <name>dfs.data.dir</name>
-        <value>file://{{ hadoop['dfs_datanode_data_dir_dn'] }}</value>
+        <value>{% for data_dir in hadoop['dfs_dir_dn'] %}{% if not loop.first and flag == 1 %},{% else %}{% set flag=1 %}{% endif %}file://{{ hadoop['dfs_dir_parent'] }}{{ data_dir }}{% endfor %}</value>
     </property>
 
     <property>
