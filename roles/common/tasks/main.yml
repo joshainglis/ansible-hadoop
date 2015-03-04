@@ -65,14 +65,8 @@
     - slaves
     - monitor
 
-- name: copy Sun JDK package
-  copy: src=dependencies/jdk-7u67-linux-x64.rpm dest=/tmp/jdk-7u67-linux-x64.rpm
-  tags:
-    - slaves
-    - monitor
-
-- name: install the Sun JDK package
-  command: rpm -Uvh /tmp/jdk-7u67-linux-x64.rpm
+- name: install Oracle JDK 7.67
+  shell: chdir=/tmp wget http://app.nidc.kr/java/jdk-7u67-linux-x64.rpm && rpm -Uvh /tmp/jdk-7u67-linux-x64.rpm
   tags:
     - slaves
     - monitor
