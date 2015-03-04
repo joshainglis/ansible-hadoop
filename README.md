@@ -23,11 +23,6 @@ edit the files:
  * `hosts` : to determine where to install services
  * `group_vars/all`: to change/add  more configuration parameters (ex: hdfs path, spark port etcetc)
 
-Also, due to a restriction with Github files size, you will have to copy jdk and spark archive to:
- * oracle JDK 7: `roles/common/files/dependencies/jdk-7u67-linux-x64.rpm`
- * spark Pkg: `roles/spark_configuration/files/spark-1.1.0-bin-cdh4.tgz`
-
-
 # Deploy a new cluster
 
 To run with Ansible:
