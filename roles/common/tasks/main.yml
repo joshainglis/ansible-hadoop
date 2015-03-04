@@ -29,6 +29,7 @@
 
 - name: create the hosts file for all machines
   template: backup=yes src=hosts dest=/etc/hosts
+  when: update_hosts
   tags:
     - slaves
     - monitor
@@ -51,6 +52,7 @@
 
 - name: update iptables
   template: backup=yes src=iptable dest=/etc/sysconfig/iptables
+  when: update_iptables
   tags:
     - slaves
     - monitor

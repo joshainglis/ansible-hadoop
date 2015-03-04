@@ -9,7 +9,7 @@ Ansible Haddop is a playbook that help you to deploy a new Hadoop and Spark clus
 
 The playbooks are designed to deploy a Hadoop cluster on a CentOS 6 or RHEL 6 environment using Ansible. The playbooks can:
 
- 1.  Deploy a fully functional Hadoop cluster with HA and automatic failover. With Zookepper, Spark and Elasticsearch.
+ 1.  Deploy a fully functional Hadoop cluster with HA and automatic failover. With Zookepper and Apache Spark.
  2. Deploy additional nodes to scale the cluster.
 
 

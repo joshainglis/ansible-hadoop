@@ -2,12 +2,18 @@
 ##
 
 # Cluster name
-site_name: nflabsprod
+site_name: YOUR_CLUSTER_NAME
 
 # IPv4 maximum transmission unit, 9216 is the maximum for Intel/Cisco hardware
 mtu: 9216
 
-#
+# Custom configuration
+# This will install additionnal services, update files
+with_elasticsearch: False
+update_iptables: False
+update_hosts: False
+
+# For iptable
 ip_range: 222.122.171.230-222.122.171.239
 #ip_range: 192.168.10.1-192.168.10.254
 

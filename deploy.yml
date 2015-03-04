@@ -16,7 +16,7 @@
 
 - hosts: elasticsearch
   roles:
-    - elasticsearch
+    - elasticsearch, when: with_elasticsearch
 
 # HADOOP
 # ======
