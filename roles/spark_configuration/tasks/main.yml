@@ -8,14 +8,8 @@
     - spark
     - slaves
 
-- name: copy spark
-  copy: src=spark-{{ spark.version }}-bin-cdh4.tgz dest=/tmp/spark-{{ spark.version }}-bin-cdh4.tgz
-  tags:
-    - spark
-    - slaves
-
-- name: download Spark
-  shell: chdir=/tmp tar zxvf /tmp/spark-{{ spark.version }}-bin-cdh4.tgz && yes | cp -rf /tmp/spark-{{ spark.version }}-bin-cdh4/* {{ spark.location }}
+- name: Download Apache Spark
+  shell: chdir=/tmp wget http://apache.mirror.cdnetworks.com/spark/spark-{{ spark.version }}/spark-{{ spark.version }}-bin-cdh4.tgz && tar zxvf /tmp/spark-{{ spark.version }}-bin-cdh4.tgz && yes | cp -rf /tmp/spark-{{ spark.version }}-bin-cdh4/* {{ spark.location }}
   tags:
     - spark
     - slaves
