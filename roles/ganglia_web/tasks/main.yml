@@ -1,0 +1,12 @@
+---
+#
+
+- name: install Ganglia web dependencies via yum
+  yum: name={{ item }}
+  with_items:
+    - make
+    - php-mcrypt
+    - rsync
+    - ganglia-web 
+  tags: ganglia
+  notify: restart php-fpm
