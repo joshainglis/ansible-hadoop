@@ -11,10 +11,11 @@ mtu: 9216
 # This will install additionnal services, update files
 with_elasticsearch: False
 update_iptables: True
-update_hosts: False
+update_hosts: True
+install_oracle_jdk: True
 
 # For iptable - hosts ip range
-ip_range: 
+ip_range: 192.168.10.1-192.168.10.255
 
 hadoop:
   dfs_dir_parent: /data/hadoop
