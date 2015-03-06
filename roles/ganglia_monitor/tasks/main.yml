@@ -1,16 +1,33 @@
 ---
 # file: roles/ganglia_monitor/tasks/main.yml
 
-- name: install Ganglia Monitor and required packages via yum
+- name: install Ganglia dependencies packages via yum
   yum: name={{ item }}
   with_items:
     - sysstat
     - rrdtool
     - rrdtool-devel
-    - ganglia
-    - ganglia-gmond
     - hddtemp
+    - apr
+    - apr-devel
+    - expat-devel
+    - expat
   tags: ganglia
+
+- name: Create ganglia user
+  user: name=ganglia
+  tags: ganglia
+
+- name: Install Ganglia gmond via RPM from vuksan
+  shell: rpm -Uvh {{ item  }}
+  with_items:
+    - http://vuksan.com/centos/RPMS-6/x86_64/libconfuse-2.6-2.el6.rf.x86_64.rpm
+    - http://vuksan.com/centos/RPMS-6/x86_64/libconfuse-devel-2.6-2.el6.rf.x86_64.rpm
+    - http://vuksan.com/centos/RPMS-6/x86_64/libganglia-3.6.0-1.x86_64.rpm
+    - http://vuksan.com/centos/RPMS-6/x86_64/ganglia-devel-3.6.0-1.x86_64.rpm
+    - http://vuksan.com/centos/RPMS-6/x86_64/ganglia-gmond-3.6.0-1.x86_64.rpm
+  tags: ganglia
+  ignore_errors: yes
 
 - name: configure gmond.conf in /etc/ganglia/gmond.conf
   template: src=gmond.conf dest=/etc/ganglia/gmond.conf owner=root group=root mode=0644
