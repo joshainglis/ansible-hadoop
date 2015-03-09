@@ -8,7 +8,7 @@ Ansible Haddop is a playbook that help you to deploy a new Hadoop (CDH4) and Spa
 The playbooks can:
 
  1. Deploy a fully functional Hadoop cluster **with High Availability (HA) and automatic failover**.
- 2. Deploy additional nodes to scale the cluster (datanode and spark slave)
+ 2. Deploy additional nodes to scale the cluster (datanodes and spark workers)
 
 ### List of services 
  * Hadoop CDH4
@@ -17,6 +17,7 @@ The playbooks can:
     * HDFS
  * Apache Spark
  * Elasticsearch *--OPTIONAL--*
+ * Ganglia *--OPTIONAL--*
 
 ## Requirements
  * Ansible 1.6+
@@ -25,8 +26,26 @@ The playbooks can:
 ## Configuration
 
 edit the files:
- * `hosts` : to determine where to install services
- * `group_vars/all`: to change/add  more configuration parameters (ex: hdfs path, spark port etcetc)
+
+ * `hosts` : Set the hosts and services
+ * `group_vars/all`: to change/add  more configuration parameters (ex: hdfs path, spark port etcetc) <br/>
+ 
+  ```
+  site_name: mycluster					# The name of your cluster
+  with_elasticsearch: True/False		# If true, deploy an Elasticsearch cluster.
+  update_iptables: True/False			# If True, change iptables file to add ip_range.
+  update_hosts: True/False				# If True, set the hosts file to every host in the cluster.
+  install_oracle_jdk: True/False		# If True, download and Install Oracle JDK from oracle server. 
+  with_ganglia: True/False				# If True, deploy ganglia to monitor your cluster health.
+  
+  spark:
+    version: 1.2.1						# Set the version of Spark you want to deploy
+    
+  elasticsearch:
+    version: 1.4.1						# Set the version of Elasticsearch you want to deploy
+    									# (**only if with_elasticsearch is True**)
+  
+  ```
 
 # Deploy a new cluster
 
@@ -65,7 +84,7 @@ Dont forget to open the port of the hosts if you want to access to your cluster 
 # Restart service or cluster
 
 restart all services run 
-```sh
+```
 ./restart
 ```
 
