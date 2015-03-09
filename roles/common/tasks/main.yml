@@ -20,6 +20,13 @@
     - ntp
     - slaves
     - monitor
+    - ganglia
+
+- name: install EPEL via YUM
+  shell: rpm -Uvh https://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+  ignore_errors: yes
+  tags: ganglia
+  when: with_ganglia
 
 - name: configure /etc/security/limits.conf with high max file descriptors (soft/hard)
   template: src=limits.conf dest=/etc/security/limits.conf mode=0644
@@ -33,6 +40,7 @@
   tags:
     - slaves
     - monitor
+    - ganglia
 
 - name: configure rsyslog with the imfile module
   template: src=rsyslog.conf dest=/etc/rsyslog.d/30-imfile.conf owner=root group=root mode=0644
@@ -56,6 +64,7 @@
   tags:
     - slaves
     - monitor
+    - ganglia
   notify: restart iptables
 
 - name: remove OpenJDK
@@ -63,24 +72,28 @@
   with_items: 
    - java
    - jdk
+  when: install_oracle_jdk
   tags:
     - slaves
     - monitor
 
 - name: install Oracle JDK 7.67
-  shell: chdir=/tmp wget http://app.nidc.kr/java/jdk-7u67-linux-x64.rpm && rpm -Uvh /tmp/jdk-7u67-linux-x64.rpm
+  shell: chdir=/tmp wget --no-check-certificate --no-cookies --header 'Cookie:oraclelicense=accept-securebackup-cookie' http://download.oracle.com/otn-pub/java/jdk/7u67-b01/jdk-7u67-linux-x64.rpm && rpm -Uvh /tmp/jdk-7u67-linux-x64.rpm
   tags:
     - slaves
     - monitor
+  when: install_oracle_jdk
 
 - name: disable SELinux in conf file
   lineinfile: dest=/etc/sysconfig/selinux regexp='^SELINUX=' line='SELINUX=disabled' state=present
   tags:
     - slaves
     - monitor
+    - ganglia
 
 - name: disable SELinux dynamically
   shell: creates=/etc/sysconfig/selinux.disabled setenforce 0 ; touch /etc/sysconfig/selinux.disabled
   tags:
     - slaves
     - monitor
+    - ganglia

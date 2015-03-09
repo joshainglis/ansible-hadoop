@@ -7,13 +7,20 @@
     - name: determine interface
       set_fact: ipv4_address="{{ hostvars[inventory_hostname].ansible_default_ipv4.address }}"
       tags:
-        [slaves, elasticsearch]
+        [slaves, elasticsearch, ganglia]
 
 # Deploy the default roles to all nodes
 - hosts: all
   roles:
     - common
+    - ganglia_monitor
 
+- hosts: monitor
+  roles:
+    - { role: nginx, when: with_ganglia }
+    - { role: ganglia_metad, when: with_ganglia }
+    - { role: ganglia_web, when: with_ganglia }
+ 
 - hosts: elasticsearch
   roles:
     - { role: elasticsearch, when: with_elasticsearch }
@@ -64,7 +71,3 @@
 - hosts: sparkworkers
   roles:
     - spark_workers
-
-- hosts: monitor
-  roles:
-    - nginx

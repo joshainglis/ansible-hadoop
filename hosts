@@ -19,24 +19,19 @@ master.nflabs.com
 master2.nflabs.com
 
 [datanodes]
-data1.nflabs.com
-data2.nflabs.com
-data3.nflabs.com
+data.nflabs.com
+
 
 # ELASTICSEARCH
 # =============
 
 [elasticsearch]
-data1.nflabs.com
-data2.nflabs.com
-data3.nflabs.com
 
 # SPARK
 # =====
 [sparkworkers]
-data1.nflabs.com
-data2.nflabs.com
-data3.nflabs.com
+data.nflabs.com
+
 
 [sparkmasters]
 master.nflabs.com
@@ -45,4 +40,4 @@ master2.nflabs.com
 # Monitoring
 # ==========
 [monitor]
-monitor.nflabs.com
+pel.nflabs.com
