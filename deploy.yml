@@ -17,9 +17,9 @@
 
 - hosts: monitor
   roles:
-    - nginx
-    - ganglia_metad
-    - ganglia_web
+    - { role: nginx, when: with_ganglia }
+    - { role: ganglia_metad, when: with_ganglia }
+    - { role: ganglia_web, when: with_ganglia }
  
 - hosts: elasticsearch
   roles:
